@@ -7,3 +7,14 @@ html {
 canvas {
   vertical-align: top;
 }
+
+.upload-zone {
+  width: 300px;
+  height: 100px;
+  padding: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px dashed black;
+  text-align: center;
+}

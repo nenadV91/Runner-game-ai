@@ -23,9 +23,9 @@ class Player {
       this.brain.mutate(0.2)
     } else {
       this.brain = new NeuralNetwork();
-      this.brain.add(new Layer({ inodes: 16, onodes: 10 }));
-      this.brain.add(new Layer({ onodes: 16 }));
-      this.brain.add(new Layer({ onodes: 8 }));
+      this.brain.add(new Layer({ inodes: 15, onodes: 10 }));
+      this.brain.add(new Layer({ onodes: 10 }));
+      this.brain.add(new Layer({ onodes: 4 }));
       this.brain.add(new Layer({ onodes: 2 }));
     }
   }
@@ -50,11 +50,11 @@ class Player {
 
         const nextOne = obstacles[i + 1];
         const nextTwo = obstacles[i + 2];
-        if(nextOne && abs(closest.x - nextOne.x) < 100) {
+        if(nextOne && abs(closest.x - nextOne.x) < 85) {
           count++;
         }
 
-        if(nextOne && nextTwo && abs(closest.x - nextTwo.x) < 100) {
+        if(nextOne && nextTwo && abs(closest.x - nextTwo.x) < 85) {
           count++;
         }
       }
@@ -65,35 +65,34 @@ class Player {
     if(closest) {
       // Player
       // position
-      input[0] = map(this.x, 0, width, 0, 1); // x position
-      input[1] = map(this.y, 0, height, 0, 1); // y position
+      input[0] = map(this.y, 0, height, 0, 1); // y position
 
       // state of a player
-      input[2] = this.isJumping ? 1 : 0; // is jumping
-      input[3] = this.isDucking ? 1 : 0; // is ducking
-      input[4] = this.isStanding ? 1 : 0; // is standing
+      input[1] = this.isJumping ? 1 : 0; // is jumping
+      input[2] = this.isDucking ? 1 : 0; // is ducking
+      input[3] = this.isStanding ? 1 : 0; // is standing
 
       // Obstacle
       // position
-      input[5] = map(closest.x, 0, width, 0, 1); // x position
-      input[6] = map(closest.y, 0, height, 0, 1); // y position
+      input[4] = map(closest.x, 0, width, 0, 1); // x position
+      input[5] = map(closest.y, 0, height, 0, 1); // y position
 
       // close obstacle count
-      input[7] = count === null ? 1 : 0; // no obstacle
-      input[8] = count === 1 ? 1 : 0; // 1 obstacle
-      input[9] = count === 2 ? 1 : 0; // 2 obstacle
-      input[10] = count === 3 ? 1 : 0; // 3 obstacle
+      input[6] = count === null ? 1 : 0; // no obstacle
+      input[7] = count === 1 ? 1 : 0; // 1 obstacle
+      input[8] = count === 2 ? 1 : 0; // 2 obstacle
+      input[9] = count === 3 ? 1 : 0; // 3 obstacle
 
       // obstacle type
-      input[11] = closest.type === 'tree' ? 1 : 0; // is tree
-      input[12] = closest.type === 'bird' ? 1 : 0; // is bird
+      input[10] = closest.type === 'tree' ? 1 : 0; // is tree
+      input[11] = closest.type === 'bird' ? 1 : 0; // is bird
 
       // obstacle speed
-      input[13] = map(closest.speed, 1, 50, 0, 1);
+      input[12] = map(closest.speed, 1, 50, 0, 1);
 
       // obstacle size
-      input[14] = map(closest.width, 1, 40, 0, 1); // obstacle width
-      input[15] = map(closest.height, 20, 50, 0, 1); // obstacle height
+      input[13] = map(closest.width, 1, 40, 0, 1); // obstacle width
+      input[14] = map(closest.height, 20, 50, 0, 1); // obstacle height
 
       const output = this.brain.predict(input);
       const [jump, duck] = output;
@@ -161,5 +160,23 @@ class Player {
     fill(this.fill);
     stroke(this.color);
     rect(this.x, this.y, this.width, this.height);
+  }
+
+  getData() {
+    return this.brain.layers.reduce((r, e, i) => {
+      const layer = {}
+      layer.weights = e.weights;
+      layer.bias = e.bias;
+      r.push(layer)
+      return r;
+    }, [])
+  }
+
+  loadData(data) {
+    for(let i = 0; i < this.brain.layers.length; i++) {
+      const layer = this.brain.layers[i];
+      Object.assign(layer.weights, data[i].weights);
+      Object.assign(layer.bias, data[i].bias);
+    }
   }
 }

@@ -65,7 +65,7 @@ class NeuralNetwork {
 
     function mutation(x) {
       if(random(1) < rate) {
-        let offset = randomGaussian() * 0.25;
+        let offset = randomGaussian() * 0.5;
         let newx = x + offset;
         return newx;
       } else {

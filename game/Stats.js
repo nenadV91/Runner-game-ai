@@ -17,8 +17,8 @@ class Stats {
   }
 
   setHS() {
-    if(!this.hs || score > this.hs) {
-      localStorage.setItem(this.key, score);
+    if(!this.hs || this.score > this.hs) {
+      localStorage.setItem(this.key, this.score);
     }
   }
 
@@ -30,9 +30,10 @@ class Stats {
     textSize(10);
     fill(this.colors.light)
     text(`Best: ${int(this.hs)}`, this.x, this.y);
+
     fill(this.colors.normal);
     text(`Speed: ${speed.toFixed(2)}`, this.x, this.y + space);
-    text(`Score: ${int(score)}`, this.x, this.y + space * 2);
+    text(`Score: ${int(population.score)}`, this.x, this.y + space * 2);
 
     // Right
     text(`Time: ${toTime(time)}`, width - 100, this.y);

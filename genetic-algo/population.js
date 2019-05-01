@@ -1,18 +1,24 @@
 class Population {
   constructor(Unit, total = 100) {
+    this.generation = 1;
+    this.imortal = false;
+    this.Unit = Unit;
     this.total = total;
     this.active = [];
     this.saved = [];
     this.pool = [];
-    this.generation = 1;
-    this.Unit = Unit;
-    this.imortal = false;
+    this.score = 0;
 
     this.create()
   }
 
   get isEmpty() {
     return !this.active.length;
+  }
+
+  get best() {
+    this.active.sort((a, b) => b.score - a.score);
+    return this.active[0];
   }
 
   create() {
@@ -27,12 +33,27 @@ class Population {
   }
 
   update() {
+    if(frameCount % 5 === 0) {
+      this.score += 1;
+    }
+  }
+
+  load(data) {
+    for(let i = this.active.length - 1; i >= 0; i--) {
+      const unit = this.active[i];
+      unit.loadData(data);
+      this.remove(i);
+    }
+  }
+
+  reset() {
     this.calcFitness();
     this.nextGeneration();
 
     this.saved.length = 0;
     this.pool.length = 0;
     this.generation += 1;
+    this.score = 0;
 
     this.timeout = setTimeout(() => {
       this.imortal = false;

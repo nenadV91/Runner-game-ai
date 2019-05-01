@@ -5,10 +5,8 @@ let population;
 let ground;
 let bottom;
 let stats;
-let score = 1;
-let scorePoint = 1
-let obstacles = [];
 let speed = 5;
+let obstacles = [];
 let obstacleRate = 75;
 let nextDist = 100;
 let time = 0;
@@ -25,13 +23,34 @@ function setup() {
   width = 750;
   height = 300;
   canvas = createCanvas(width, height);
+  canvas.parent('canvas')
 
   bottom = height - 20;
-  population = new Population(Player, 100);
+  population = new Population(Player, 250);
   ground = new Ground(width, bottom);
   stats = new Stats(25, 25);
 
   obstacles.push(new Obstacle())
+
+  $("#save-data").on('click', event => {
+    const data = population.best.getData();
+    saveJSON(data, 'data.json')
+  })
+
+  function onReaderLoad(event) {
+    var data = JSON.parse(event.target.result);
+    population.load(data);
+  }
+
+  $("#upload-data").on('change', function(event) {
+    const file = event.target.files[0]
+
+    if(file) {
+      var reader = new FileReader();
+      reader.onload = onReaderLoad;
+      reader.readAsText(event.target.files[0]);
+    }
+  })
 }
 
 function draw() {
@@ -40,23 +59,18 @@ function draw() {
 
   stats.show();
   ground.show();
+  population.update();
 
   if(population.isEmpty) {
-    population.update();
-    score = 1;
-    speed = 5;
+    population.reset();
+    stats.setHS();
     obstacles = [];
     frameCount = 0;
-    scorePoint = 1;
-  }
-
-  if(frameCount % 5 === 0) {
-    score += scorePoint;
+    speed = 5;
   }
 
   if(frameCount % 100 === 0) {
     speed += 0.15;
-    scorePoint += 0.1;
   }
 
   if(!nextDist--) {
