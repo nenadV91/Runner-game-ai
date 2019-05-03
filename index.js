@@ -1,3 +1,4 @@
+let ui;
 let canvas;
 let width;
 let height;
@@ -29,28 +30,9 @@ function setup() {
   population = new Population(Player, 250);
   ground = new Ground(width, bottom);
   stats = new Stats(25, 25);
+  ui = new UI();
 
   obstacles.push(new Obstacle())
-
-  $("#save-data").on('click', event => {
-    const data = population.best.getData();
-    saveJSON(data, 'data.json')
-  })
-
-  function onReaderLoad(event) {
-    var data = JSON.parse(event.target.result);
-    population.load(data);
-  }
-
-  $("#upload-data").on('change', function(event) {
-    const file = event.target.files[0]
-
-    if(file) {
-      var reader = new FileReader();
-      reader.onload = onReaderLoad;
-      reader.readAsText(event.target.files[0]);
-    }
-  })
 }
 
 function draw() {

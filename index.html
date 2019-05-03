@@ -8,11 +8,28 @@
 </head>
 
 <body>
-  <div id="canvas"></div>
-
   <div id="app">
-    <button id="save-data">Save data</button>
-    <input id="upload-data" type="file" />
+    <div id="canvas"></div>
+
+    <div id="ui">
+      <div class="ui-field">
+        <button id="save-data">Save data</button>
+        <span class="ui-text">Save brain data as json file from currently best unit.</span>
+      </div>
+
+      <div class="ui-field">
+        <label class="file-upload">
+          <input id="upload-data" type="file" />
+          Load data
+        </label>
+        <span class="ui-text limit-width">Load brain data from json file. Data will be applied to whole population + mutation. Data size must match brain size of current population.</span>
+      </div>
+
+      <div class="ui-field">
+        <button id="apply-data">Apply data</button>
+        <textarea id="loaded-data" cols="30" rows="5"></textarea>
+      </div>
+    </div>
   </div>
 
   <!-- Scripts -->
@@ -24,6 +41,9 @@
   <script src="scripts/custom.js"></script>
 
   <!-- Assets -->
+
+  <!-- UI -->
+  <script src="ui/ui.js"></script>
 
   <!-- Genetic algo -->
   <script src="genetic-algo/population.js"></script>
