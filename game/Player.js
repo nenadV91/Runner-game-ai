@@ -20,7 +20,7 @@ class Player {
 
     if(opts.brain instanceof NeuralNetwork) {
       this.brain = opts.brain.clone();
-      this.brain.mutate(0.1)
+      this.brain.mutate(opts.mutationRate || 0.1);
     } else {
       this.brain = new NeuralNetwork();
       this.brain.add(new Layer({ inodes: 15, onodes: 10 }));

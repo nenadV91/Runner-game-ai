@@ -8,6 +8,7 @@ class Population {
     this.saved = [];
     this.pool = [];
     this.score = 0;
+    this.mutationRate = 0.2;
 
     this.create()
   }
@@ -98,7 +99,10 @@ class Population {
   nextGeneration() {
     for(let i = 0; i < this.total; i++) {
       const parent = this.pick();
-      const child = new this.Unit({ brain: parent.brain });
+      const child = new this.Unit({
+        brain: parent.brain,
+        mutationRate: this.mutationRate
+      });
       this.active.push(child);
     }
   }

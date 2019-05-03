@@ -28,7 +28,7 @@ canvas {
 }
 
 #canvas {
-  box-shadow: 2px 2px 20px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 2px 2px 10px 0 rgba(0, 0, 0, 0.1);
 }
 
 #ui {
@@ -115,8 +115,8 @@ input[type="file"] {
 }
 
 .ui-value.slider {
-  max-width: 450px;
-  padding-left: 5px;
+  max-width: 400px;
+  padding-left: 10px;
 }
 
 .info {

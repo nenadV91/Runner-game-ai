@@ -10,6 +10,7 @@ class UI {
     this.$reset = $("#reset");
     this.$trained = $("#trained-example");
     this.$unitsSlider = $("#total-units-slider");
+    this.$mutationRateSlider = $("#mutation-rate-slider");
     this.$killActive = $("#kill-active");
 
     this.$save.on('click', this.handleSave.bind(this));
@@ -29,10 +30,23 @@ class UI {
       min: 1,
       max: 250,
       grid: true,
-      from: population.total,
       skin: "modern",
+      from: population.total,
       onFinish: function(data) {
         population.total = data.from;
+      }
+    });
+
+    this.$mutationRateSlider.ionRangeSlider({
+      min: 0,
+      max: 1,
+      step: 0.01,
+      grid: true,
+      skin: "modern",
+      from: population.mutationRate,
+      onFinish: function(data) {
+        console.log(data)
+        population.mutationRate = data.from;
       }
     });
   }

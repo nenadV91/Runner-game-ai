@@ -29,6 +29,16 @@
       </div>
 
       <div class="ui-field">
+        <div class="ui-label">
+          <div>Mutation rate:</div>
+          <div class="ui-text label">Applied on next generation</div>
+        </div>
+        <div class="ui-value slider">
+          <input type="text" id="mutation-rate-slider" />
+        </div>
+      </div>
+
+      <div class="ui-field">
         <button id="save-data">Save data</button>
         <span class="ui-text">Save brain data as json file from currently best unit.</span>
       </div>
@@ -51,6 +61,7 @@
           <option value="" selected disabled hidden>Select example</option>
           <option value="0">Trained example 1</option>
           <option value="1">Trained example 2</option>
+          <option value="2">Trained example 3</option>
         </select>
 
         <div class="ui-text">Select pre-trained data set.</div>
