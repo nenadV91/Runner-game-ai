@@ -11,6 +11,7 @@ let obstacles = [];
 let obstacleRate = 75;
 let nextDist = 100;
 let time = 0;
+const total = 1;
 
 setInterval(() => {
   time += 1
@@ -27,12 +28,14 @@ function setup() {
   canvas.parent('canvas')
 
   bottom = height - 20;
-  population = new Population(Player, 150);
+  population = new Population(Player, total);
   ground = new Ground(width, bottom);
   stats = new Stats(25, 25);
   ui = new UI();
 
-  obstacles.push(new Obstacle())
+  obstacles.push(new Obstacle());
+  const [player] = population.active;
+  player.loadData(trained_data);
 }
 
 function draw() {

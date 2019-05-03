@@ -27,6 +27,12 @@ class Population {
     }
   }
 
+  killActive() {
+    for(let i = this.active.length - 1; i >= 0; i--) {
+      this.remove(i);
+    }
+  }
+
   remove(index) {
     const [unit] = this.active.splice(index, 1);
     this.saved.push(unit);

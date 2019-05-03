@@ -4,7 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <title>Document</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="styles/style.css">
+  <link rel="stylesheet" href="styles/ion.rangeSlider.min.css">
 </head>
 
 <body>
@@ -13,7 +14,18 @@
 
     <div id="ui">
       <div id="controls">
-        <button id="reset">Reset</button>
+        <button id="kill-active">Kill active</button>
+        <button id="reset">Reset all</button>
+      </div>
+
+      <div class="ui-field">
+        <div class="ui-label">
+          <div>Total units:</div>
+          <div class="ui-text label">Applied on next generation</div>
+        </div>
+        <div class="ui-value slider">
+          <input type="text" id="total-units-slider" />
+        </div>
       </div>
 
       <div class="ui-field">
@@ -35,9 +47,24 @@
       </div>
 
       <div class="ui-field">
-        <button id="apply-data">Apply data</button>
+        <select id="trained-example">
+          <option value="" selected disabled hidden>Select example</option>
+          <option value="0">Trained example 1</option>
+          <option value="1">Trained example 2</option>
+        </select>
+
+        <div class="ui-text">Select pre-trained data set.</div>
+      </div>
+
+      <div class="ui-field">
+        <div class="ui-buttons">
+          <button id="apply-data">Apply data</button>
+          <button id="clear-data">Clear</button>
+        </div>
+
         <textarea id="loaded-data" cols="30" rows="5"></textarea>
       </div>
+
     </div>
   </div>
 
@@ -47,12 +74,15 @@
   <script src="scripts/p5.dom.js"></script>
   <script src="scripts/p5.play.js"></script>
   <script src="scripts/p5.collide2d.min.js"></script>
+  <script src="scripts/ion.rangeSlider.min.js"></script>
+
   <script src="scripts/custom.js"></script>
 
   <!-- Assets -->
+  <script src="data/trained.js"></script>
 
   <!-- UI -->
-  <script src="ui/ui.js"></script>
+  <script src="ui/index.js"></script>
 
   <!-- Genetic algo -->
   <script src="genetic-algo/population.js"></script>
