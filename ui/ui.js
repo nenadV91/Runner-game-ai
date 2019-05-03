@@ -5,10 +5,19 @@ class UI {
     this.$apply = $("#apply-data");
     this.$upload = $("#upload-data");
     this.$save = $("#save-data");
+    this.$reset = $("#reset");
 
     this.$save.on('click', this.handleSave.bind(this));
     this.$apply.on('click', this.handleApply.bind(this));
     this.$upload.on('change', this.handleUpload.bind(this));
+    this.$reset.on('click', this.handleReset.bind(this));
+  }
+
+  handleReset() {
+    population = new Population(Player, total);
+    obstacles = [];
+    frameCount = 0;
+    speed = 5;
   }
 
   handleUpload(event) {

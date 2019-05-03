@@ -12,6 +12,10 @@
     <div id="canvas"></div>
 
     <div id="ui">
+      <div id="controls">
+        <button id="reset">Reset</button>
+      </div>
+
       <div class="ui-field">
         <button id="save-data">Save data</button>
         <span class="ui-text">Save brain data as json file from currently best unit.</span>
@@ -22,7 +26,12 @@
           <input id="upload-data" type="file" />
           Load data
         </label>
-        <span class="ui-text limit-width">Load brain data from json file. Data will be applied to whole population + mutation. Data size must match brain size of current population.</span>
+
+        <div class="ui-text limit-width">
+          <span>Load brain data from json file.</span><br>
+          <span>Data will be applied to whole population + mutation.</span><br>
+          <span>Data size must match brain size of current population.</span>
+        </div>
       </div>
 
       <div class="ui-field">
