@@ -132,3 +132,16 @@ input[type="file"] {
   display: inline-flex;
   vertical-align: top;
 }
+
+.irs--modern .irs-from,
+.irs--modern .irs-to,
+.irs--modern .irs-single,
+.irs--modern .irs-bar {
+  background: #91d5ff !important;
+}
+
+.irs--modern .irs-from:before,
+.irs--modern .irs-to:before,
+.irs--modern .irs-single:before {
+  border-top-color: #91d5ff !important;
+}

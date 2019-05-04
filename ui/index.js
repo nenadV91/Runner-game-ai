@@ -91,9 +91,21 @@ class UI {
   }
 
   handleApply() {
-    const data = this.$loaded.val();
-    population.load(JSON.parse(data));
-    this.$loaded.val("");
-    this.$trained.val("");
+    const value = this.$loaded.val();
+
+    if(value.length) {
+      try {
+        const data = JSON.parse(value);
+
+        if(Array.isArray(data)) {
+          population.load(data);
+          this.$loaded.val("");
+          this.$trained.val("");
+        }
+      } catch (err) {
+        console.log('Not valid data type.')
+      }
+
+    }
   }
 }
